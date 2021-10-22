@@ -1,7 +1,7 @@
-import Firebase from 'firebase/compat/app'
-import 'firebase/compat/firestore'
-import 'firebase/compat/auth'
-import { seedDatabase } from '../seed'
+import Firebase from 'firebase/app'
+import 'firebase/firestore'
+import 'firebase/auth'
+
 const config={
   apiKey: 'AIzaSyC9CJ7xCqTh147B_CG8etN96Ct6aioNx6s',
   authDomain: "instagram-clone-bb640.firebaseapp.com",
