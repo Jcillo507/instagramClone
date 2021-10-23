@@ -10,7 +10,17 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const isInvalid = password === "" || emailAddress === "";
-  const handleLogin = () => {};
+  const handleLogin = async(e) => {
+    e.preventDefault();
+    try {
+      await firebase.auth().signInWithEmailAndPassword(emailAddress, password)
+      history.push(ROUTES.DASHBOARD)
+    } catch (e) {
+      setEmailAddress('')
+      setPassword('')
+      setError(e.message)
+    }
+  };
   useEffect(() => {
     document.title = "Login - Instagram";
   }, []);
@@ -41,7 +51,7 @@ const Login = () => {
             />
             <input
               className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
-              type="text"
+              type="password"
               aria-label="Enter your Password"
               placeholder="Password"
               onChange={({ target }) => setPassword(target.value)}
@@ -49,7 +59,7 @@ const Login = () => {
             <button
               disabled={isInvalid}
               type="submit"
-              className={`bg-blue-500 text-white w-full rounded h-8 font-bold
+              className={`bg-blue-medium text-white w-full rounded h-8 font-bold
             ${isInvalid && "opacity-50"}`}
             >
               Login
