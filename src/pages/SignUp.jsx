@@ -19,18 +19,14 @@ const SignUp = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     const usernameExists = await doesUsernameExist(username);
-    console.log('1')
     if(!usernameExists){
       try {
-        console.log("2");
         const createdUserResult = await firebase.auth().createUserWithEmailAndPassword(emailAddress, password)
-        console.log("3");
         await createdUserResult.user.updateProfile({
           displayName: username
         })
-        console.log("4");
         await firebase.firestore().collection('users').add({
-          userID: createdUserResult.user.uid,
+          userId: createdUserResult.user.uid,
           username: username.toLowerCase(),
           fullName,
           emailAddress: emailAddress.toLowerCase(),
