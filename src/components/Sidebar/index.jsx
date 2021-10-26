@@ -5,12 +5,11 @@ import Suggestions from './Suggestions'
 
 
 const Sidebar = () => {
-  const {user} = useUser()
-  console.log(user)
+  const {user:{fullName, username, userId}} = useUser()
   return (
     <div className='p-4'>
-      <User/>
-      <Suggestions/>
+      <User username={username} fullName={fullName}/>
+      <Suggestions userId={userId}/>
     </div>
   )
 }
