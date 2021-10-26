@@ -7,7 +7,6 @@ import * as ROUTES from "../constants/routes";
 const Header = () => {
   const{ firebase} = useContext(FirebaseContext);
   const {user} = useContext(UserContext);
-  console.log(user?.user?.displayName)
   const history = useHistory();
   return (
     <header className="h-16 bg-white border-b border-gray-primary mb-8">
@@ -78,8 +77,8 @@ const Header = () => {
                   <Link to={`/p/${user?.username}`}>
                     <img
                       className="rounded-full h-8 w-8 flex"
-                      src={`/images/avatars/${user?.user?.displayName}.jpg`}
-                      alt={`${user?.user?.displayName} profile`}
+                      src={`/images/avatars/${user?.displayName}.jpg`}
+                      alt={`${user?.displayName} profile`}
                     />
                   </Link>
                 </div>
