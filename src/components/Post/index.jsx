@@ -1,14 +1,17 @@
 import {useRef} from 'react'
 import PropTypes from "prop-types";
+import Header from './Header'
+import Image from './Image'
 
 
 const Post = ({content}) => {
   console.log(content)
   return (
-    <div>
-      post
+    <div className="rounded col-span-4 border bg-white border-gray-primary mb-12">
+      <Header username={content.username} />
+      <Image src={content.imageSrc} caption={content.caption} />
     </div>
-  )
+  );
 }
 
 export default Post
