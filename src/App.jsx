@@ -6,7 +6,7 @@ import UserContext from "./context/user";
 import "react-loading-skeleton/dist/skeleton.css";
 
 import ProtectedRoute from "./helpers/protected-route";
-import isUserLoggedIn from "./helpers/is-user-logged-in";
+import IsUserLoggedIn from "./helpers/is-user-logged-in";
 
 const Login = lazy(() => import("./pages/Login"));
 const SignUp = lazy(() => import("./pages/SignUp"));
@@ -21,20 +21,20 @@ const App = () => {
       <Router>
         <Suspense fallback={<p>Loading...</p>}>
           <Switch>
-            <isUserLoggedIn
+            <IsUserLoggedIn
               user={user}
               loggedInPath={ROUTES.DASHBOARD}
               path={ROUTES.LOGIN}
             >
               <Route path={ROUTES.LOGIN} component={Login} />
-            </isUserLoggedIn>
-            <isUserLoggedIn
+            </IsUserLoggedIn>
+            <IsUserLoggedIn
               user={user}
               loggedInPath={ROUTES.DASHBOARD}
               path={ROUTES.SIGN_UP}
             >
               <Route path={ROUTES.SIGN_UP} component={SignUp} />
-            </isUserLoggedIn>
+            </IsUserLoggedIn>
             <Route path={ROUTES.PROFILE} component={Profile} />
             <ProtectedRoute user={user} path={ROUTES.DASHBOARD} exact>
               <Dashboard />
