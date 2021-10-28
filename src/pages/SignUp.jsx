@@ -19,29 +19,31 @@ const SignUp = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     const usernameExists = await doesUsernameExist(username);
-    if(!usernameExists){
+    if (!usernameExists) {
       try {
-        const createdUserResult = await firebase.auth().createUserWithEmailAndPassword(emailAddress, password)
+        const createdUserResult = await firebase
+          .auth()
+          .createUserWithEmailAndPassword(emailAddress, password);
         await createdUserResult.user.updateProfile({
-          displayName: username
-        })
-        await firebase.firestore().collection('users').add({
+          displayName: username,
+        });
+        await firebase.firestore().collection("users").add({
           userId: createdUserResult.user.uid,
           username: username.toLowerCase(),
           fullName,
           emailAddress: emailAddress.toLowerCase(),
-          following:[],
-          dateCreated: Date.now()
-        })
-        history.push(ROUTES.DASHBOARD)
+          following: [],
+          dateCreated: Date.now(),
+        });
+        history.push(ROUTES.DASHBOARD);
       } catch (error) {
-        setFullName('')
-        setEmailAddress('')
-        setPassword('')
-        setError(error.message)
+        setFullName("");
+        setEmailAddress("");
+        setPassword("");
+        setError(error.message);
       }
-    }else{
-      setError("That username is taken please chose another")
+    } else {
+      setError("That username is taken please chose another");
     }
   };
   useEffect(() => {
@@ -110,7 +112,7 @@ const SignUp = () => {
           <p className="text-sm">
             Have an account?{` `}
             <Link to={ROUTES.LOGIN} className="font-bold text-blue-medium">
-             Login
+              Login
             </Link>
           </p>
         </div>

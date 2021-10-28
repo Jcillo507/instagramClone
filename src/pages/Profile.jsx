@@ -1,11 +1,34 @@
-import React from 'react'
+import { useParams, useHistory } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { getUserbyUsername } from "../services/firebase";
+import * as ROUTES from "../constants/routes";
+import Header from "../components/Header";
 
 const Profile = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  const { username } = useParams();
+  const [user, setUser] = useState(null);
+  const history = useHistory();
 
-export default Profile
+  useEffect(() => {
+    const checkUserExists = async () => {
+      const [user] = await getUserbyUsername(username);
+      if (user?.userId) {
+        setUser(user);
+      } else {
+        history.push(ROUTES.NOT_FOUND);
+      }
+    };
+    checkUserExists();
+  }, [username, history]);
+
+  return user?.username ? (
+    <div className="bg-gray-background">
+      <Header />
+      <div className="mx-auto max-w-screen-lg">
+        {/* <UserProfile user={user} /> */}{username}
+      </div>
+    </div>
+  ) : null;
+};
+
+export default Profile;

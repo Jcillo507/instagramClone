@@ -4,26 +4,28 @@ import FirebaseContext from "../../context/firebase";
 import UserContext from "../../context/user";
 
 const Actions = ({ docId, totalLikes, likedPhoto, handleFocus }) => {
-  const {user: { uid: userId =''}} = useContext(UserContext);
-   const [toggleLiked, setToggleLiked] = useState(likedPhoto);
-   const [likes, setLikes] = useState(totalLikes);
-   const { firebase, FieldValue } = useContext(FirebaseContext);
-   
-   const handleToggleLike = async ()=>{
-        setToggleLiked((toggleLiked) => !toggleLiked);
+  const {
+    user: { uid: userId = "" },
+  } = useContext(UserContext);
+  const [toggleLiked, setToggleLiked] = useState(likedPhoto);
+  const [likes, setLikes] = useState(totalLikes);
+  const { firebase, FieldValue } = useContext(FirebaseContext);
 
-        await firebase
-          .firestore()
-          .collection("photos")
-          .doc(docId)
-          .update({
-            likes: toggleLiked
-              ? FieldValue.arrayRemove(userId)
-              : FieldValue.arrayUnion(userId),
-          });
+  const handleToggleLike = async () => {
+    setToggleLiked((toggleLiked) => !toggleLiked);
 
-        setLikes((likes) => (toggleLiked ? likes - 1 : likes + 1));
-   }
+    await firebase
+      .firestore()
+      .collection("photos")
+      .doc(docId)
+      .update({
+        likes: toggleLiked
+          ? FieldValue.arrayRemove(userId)
+          : FieldValue.arrayUnion(userId),
+      });
+
+    setLikes((likes) => (toggleLiked ? likes - 1 : likes + 1));
+  };
   return (
     <>
       <div className="flex justify-between p-4">

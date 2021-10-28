@@ -10,15 +10,15 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const isInvalid = password === "" || emailAddress === "";
-  const handleLogin = async(e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await firebase.auth().signInWithEmailAndPassword(emailAddress, password)
-      history.push(ROUTES.DASHBOARD)
+      await firebase.auth().signInWithEmailAndPassword(emailAddress, password);
+      history.push(ROUTES.DASHBOARD);
     } catch (e) {
-      setEmailAddress('')
-      setPassword('')
-      setError(e.message)
+      setEmailAddress("");
+      setPassword("");
+      setError(e.message);
     }
   };
   useEffect(() => {
