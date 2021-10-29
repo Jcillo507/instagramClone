@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { getUserbyUsername } from "../services/firebase";
 import * as ROUTES from "../constants/routes";
 import Header from "../components/Header";
+import UserProfile from "../components/Profile";
 
 const Profile = () => {
   const { username } = useParams();
@@ -25,7 +26,7 @@ const Profile = () => {
     <div className="bg-gray-background">
       <Header />
       <div className="mx-auto max-w-screen-lg">
-        {/* <UserProfile user={user} /> */}{username}
+        <UserProfile user={user} />
       </div>
     </div>
   ) : null;
